@@ -21,7 +21,7 @@ aws batch submit-job \
   --job-name nf-cctyper \
   --job-queue priority-maf-pipelines \
   --job-definition nextflow-production \
-  --container-overrides command="s3://nextflow-pipelines/nf-cctyper, \
+  --container-overrides command="FischbachLab/nf-cctyper, \
 "--project", "TEST", \
 "--seedfile", "s3://genomics-workflow-core/Results/cctyper/230816_seedfile.tsv", \
 "--outdir", "s3://genomics-workflow-core/Results/cctyper" "
