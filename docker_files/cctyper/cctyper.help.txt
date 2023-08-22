@@ -1,0 +1,89 @@
+usage: cctyper [-h] [-t THREADS] [--prodigal {single,meta}] [--circular]
+               [--keep_tmp] [--log_lvl {DEBUG,INFO,WARNING,ERROR}]
+               [--redo_typing] [--simplelog] [--db DB] [--dist DIST]
+               [--overall_eval OVERALL_EVAL]
+               [--overall_cov_seq OVERALL_COV_SEQ]
+               [--overall_cov_hmm OVERALL_COV_HMM] [--ccd CCD]
+               [--pred_prob PRED_PROB] [--kmer KMER] [--repeat_id REPEAT_ID]
+               [--spacer_id SPACER_ID] [--spacer_sem SPACER_SEM]
+               [--exact_stats] [--seed SEED] [--skip_blast]
+               [--searchWL SEARCHWL] [--minNR MINNR] [--minRL MINRL]
+               [--maxRL MAXRL] [--minSL MINSL] [--maxSL MAXSL]
+               [--expand EXPAND] [--custom_hmm CUSTOM_HMM] [--no_plot]
+               [--no_grid]
+               input output
+
+CRISPRCasTyper version 1.8.0
+
+positional arguments:
+  input                 Input fasta file
+  output                Prefix for output directory
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -t THREADS, --threads THREADS
+                        Number of parallel processes [4].
+  --prodigal {single,meta}
+                        Which mode to run prodigal in [single].
+  --circular            Input should be treated as circular.
+  --keep_tmp            Keep temporary files (prodigal, hmmer, minced).
+  --log_lvl {DEBUG,INFO,WARNING,ERROR}
+                        Logging level [INFO].
+  --redo_typing         Redo the typing. Skip prodigal and HMMER and load the
+                        hmmer.tab from the output dir.
+  --simplelog           No color or progress bar in log.
+
+data arguments:
+  --db DB               Path to database. Only needed if CCTYPER_DB
+                        environment variable is not set.
+
+cas arguments:
+  --dist DIST           Max allowed number of unknown genes between cas genes
+                        in operon [3].
+  --overall_eval OVERALL_EVAL
+                        Overall E-value threshold [0.01].
+  --overall_cov_seq OVERALL_COV_SEQ
+                        Overall sequence coverage threshold [0.3].
+  --overall_cov_hmm OVERALL_COV_HMM
+                        Overall HMM coverage threshold [0.3].
+
+crispr arguments:
+  --ccd CCD             Distance (bp) threshold to connect Cas operons and
+                        CRISPR arrays [10000].
+  --pred_prob PRED_PROB
+                        Prediction probability cut-off for assigning subtype
+                        to CRISPR repeats [0.75].
+  --kmer KMER           kmer size. Has to match training kmer size! [4].
+  --repeat_id REPEAT_ID
+                        Minimum average sequence identity between repeats for
+                        trusted arrays [70].
+  --spacer_id SPACER_ID
+                        Maximum average sequence identity between spacers for
+                        trusted arrays [55].
+  --spacer_sem SPACER_SEM
+                        Maximum spacer length standard error of the mean for
+                        trusted arrays [3.5].
+  --exact_stats         Repeat and spacer identity is exact (slow for large
+                        CRISPR) in contrast to approximate (default, fast,
+                        based on sample of repeats/spacers).
+  --seed SEED           Seed for sampling when estimating CRISPR stats (see
+                        argument above) [42].
+  --skip_blast          Disable BLAST search of CRISPRs near cas operons.
+  --searchWL SEARCHWL   MinCED option - Length of search window. Range: 6-9
+                        [8].
+  --minNR MINNR         MinCED option - Minimum number of repeats [3].
+  --minRL MINRL         MinCED option - Minimum repeat length [23].
+  --maxRL MAXRL         MinCED option - Maximum repeat length [47].
+  --minSL MINSL         MinCED option - Minimum spacer length [26].
+  --maxSL MAXSL         MinCED option - Maximum spacer length [50].
+
+plotting arguments:
+  --expand EXPAND       Expand operons with un-annotated genes. The value
+                        determines by how many bp in each end to expand. 0
+                        only fills gaps [0].
+  --custom_hmm CUSTOM_HMM
+                        Path to custom HMM database to decorate plot. Warning:
+                        This overwrites plotting of low-quality matches to Cas
+                        HMMs
+  --no_plot             Do not draw a map of CRISPR-Cas.
+  --no_grid             Do not add grid to plot.
