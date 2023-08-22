@@ -72,6 +72,6 @@ Channel
 
      script:
      """
-     cctyper -h
+     cctyper_wrapper.sh "$genome" "$file" "${params.project}" "${params.outdir}"
      """
  }

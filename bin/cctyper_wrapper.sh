@@ -1,4 +1,4 @@
-#!/usr/bin/env bash -x
+#!/bin/bash -x
 
 set -e
 set -u
@@ -23,7 +23,7 @@ LOCAL_GENOME="${OUTPUTDIR}/genomes"
 GENOME_LOCALPATH="${LOCAL_GENOME}/$GENOME_NAME.fasta"
 S3OUTPUTPATH="${S3OUTDIR}/$PROJECT/$GENOME_NAME"
 
-mkdir -p "${OUTPUTDIR}" "${LOCAL_OUTPUT}" "${LOCAL_GENOME}"
+mkdir -p "${OUTPUTDIR}" "${LOCAL_GENOME}"
 trap '{ rm -rf ${OUTPUTDIR} ; exit 255; }' 1
 
 # Download the genome from S3:

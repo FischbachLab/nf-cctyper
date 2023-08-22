@@ -1,9 +1,7 @@
 README
 ====================
 
-## CCTyper: Automatic detection and subtyping of CRISPR-Cas operons 
-
-## References:
+## CCTyper: Automatic detection and subtyping of CRISPR-Cas operons
 
 ## Seedfile example
 ### Note that the seedfile is a CSV (comma-separated values) file with header
@@ -29,5 +27,6 @@ aws batch submit-job \
 
 ### The final output file path:
 ```{bash}
-s3://genomics-workflow-core/Results/cctyper/TEST/
+s3://genomics-workflow-core/Results/cctyper/TEST/Alistipes-putredinis-DSM-17216
 ```
+## References:
