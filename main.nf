@@ -1,5 +1,5 @@
 #!/usr/bin/env nextflow
-nextflow.enable.dsl=1
+nextflow.enable.dsl=2
 // If the user uses the --help flag, print the help text below
 params.help = false
 
@@ -44,14 +44,6 @@ Channel
  */
 
 
-Channel
- .fromPath(params.seedfile)
- .ifEmpty { exit 1, "Cannot find any seed file matching: ${params.seedfile}." }
- .splitCsv(header: ['genome', 'file'], sep: ',', skip: 1)
- .map{ row -> tuple(row.genome, row.file)}
- .set { seedfile_ch }
-
-
  process cctyper {
      tag "$genome"
 
@@ -66,7 +58,7 @@ Channel
      //bash cctyper_wrapper.sh "$genome" "$file" "${params.project}" "${params.outdir}"
 
      input:
-     tuple val(genome), val(file) from seedfile_ch
+     tuple val(genome), val(file)
 
      output:
 
@@ -75,3 +67,16 @@ Channel
      cctyper_wrapper.sh "$genome" "$file" "${params.project}" "${params.outdir}"
      """
  }
+
+ Channel
+  .fromPath(params.seedfile)
+  .ifEmpty { exit 1, "Cannot find any seed file matching: ${params.seedfile}." }
+  .splitCsv(header: ['genome', 'file'], sep: ',', skip: 1)
+  .map{ row -> tuple(row.genome, row.file)}
+  .set { seedfile_ch }
+
+  workflow {
+
+      seedfile_ch | cctyper
+
+  }
