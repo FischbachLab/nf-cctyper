@@ -51,9 +51,6 @@ Channel
      cpus { 16 * task.attempt }
      memory { 32.GB * task.attempt }
 
-     errorStrategy { task.exitStatus in 137..140 ? 'retry' : 'terminate' }
-     maxRetries 2
-
      //publishDir "${params.outdir}/${params.project}/${genome}", mode:'copy'
      //bash cctyper_wrapper.sh "$genome" "$file" "${params.project}" "${params.outdir}"
 
